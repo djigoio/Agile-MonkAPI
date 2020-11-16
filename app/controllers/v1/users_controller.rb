@@ -1,5 +1,5 @@
 class V1::UsersController < ApplicationController
-  before_action :authenticate_admin
+  before_action :authenticate_user!, except: :create
   before_action :set_user, only: [:show, :update, :destroy]
 
   def index
@@ -9,7 +9,7 @@ class V1::UsersController < ApplicationController
 
   def create
     @user = User.create!(user_params)
-    json_response(@user)
+    render json: {status: 'OK', message: 'User generated', data: @user}, status: :ok
   end
 
   def show
@@ -34,5 +34,5 @@ class V1::UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-  end    
+  end
 end

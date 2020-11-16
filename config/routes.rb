@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-#devise_for :users
+  devise_for :users, skip: %i[registrations sessions passwords]
   namespace 'v1' do
     resources :customers
     resources :users
-    resources :sessions, only: [:create, :destroy]
+  end
+
+  devise_scope :user do
+    post '/signup', to: 'registrations#create'
+    post '/login', to: 'sessions#create'
   end
 end

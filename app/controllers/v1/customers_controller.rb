@@ -1,7 +1,9 @@
 class V1::CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :update, :destroy]
-  before_action :set_last_updated_by, only: :update
-
+  # before_action :set_last_updated_by, only: :update
+  # TODO Fix this callback
+  # TODO current_user not being set
+  
   def index
     customers = Customer.all
     successful_response('All customers loaded', customers)
@@ -63,4 +65,5 @@ class V1::CustomersController < ApplicationController
   def erroneous_response(message, data)
     render json: {status: 'ERROR', message: message, data: data.errors}, status: :unprocessable_entity
   end
+
 end
