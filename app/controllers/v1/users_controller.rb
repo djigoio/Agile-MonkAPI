@@ -1,7 +1,7 @@
 class V1::UsersController < ApplicationController
   before_action :authenticate_admin
   before_action :set_user, only: [:show, :update, :destroy]
-  #TODO check wether json_response_or my solution
+
   def index
     @users = User.all
     json_response(@users)
