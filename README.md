@@ -19,7 +19,7 @@ rails s
 ```
 
 ## API Interaction
-To interact with the API once the project is set-up, run Postman or any other similar software, and follow the instructions written in our wiki.
+To interact with the API once the project is set-up, run Postman or any other similar software, and follow the instructions written in our wiki. A sample user is there in case you need it!
 
 Some sample URLs to work with are:
 
