@@ -13,17 +13,17 @@ class V1::UsersController < ApplicationController
   end
 
   def show
-    json_response(@user)
+    render json: {status: 'OK', message: 'User shown', data: @user}, status: :ok
   end
   
   def update
     @user.update!(user_params)
-    json_response('The user has been updated', 200)
+    render json: {status: 'OK', message: 'User updated', data: @user}, status: :ok
   end
 
   def destroy
     @user.destroy!
-    json_response( 'The user has been deleted from the database', 200)
+    render json: {status: 'OK', message: 'User deleted', data: @user}, status: :ok
   end
 
   private
