@@ -1,4 +1,5 @@
 # MonkAPI
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop-hq/rubocop)
 
 MonkAPI is an API made for a company test, where you can authenticate as a user and CRUD other users as an admin or CRUD other customers.
 
