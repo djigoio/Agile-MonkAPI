@@ -18,7 +18,7 @@ rails db:migrate db:seed
 ```bash
 rails s
 ```
-You may need a secret in your `.env` file. If so, please add this file to the root of your project and add `DEVISE_JWT_SECRET_KEY=STRING` where STRING is a secret key you can get by writing `rake secret` on your rails console.
+You may need a secret in your`.env` file so Devise JWT can generate tokens for your API. If so, please add this file to the root of your project and add `DEVISE_JWT_SECRET_KEY=STRING` where STRING is a secret key you can get by writing `rake secret` on your rails console.
 
 ## API Interaction
 To interact with the API once the project is set-up, run Postman or any other similar software, and follow the instructions written in our wiki. A sample user is there in case you need it!
