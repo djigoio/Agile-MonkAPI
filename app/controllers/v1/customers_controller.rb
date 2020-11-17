@@ -15,10 +15,8 @@ class V1::CustomersController < ApplicationController
   end
 
   def create
-    #TODO Allow avatar to customer_params
     @customer = Customer.create(customer_params)
     attach_avatar_to_customer if params[:avatar].present?
-    #TODO Avatar param not working with value
     #customer.update_attribute(:created_by, current_user.id)
     successful_response('Customer created', @customer)
   end
@@ -51,7 +49,7 @@ class V1::CustomersController < ApplicationController
   end
 
   def customer_params
-    params.require(:customer).permit(:avatar, :name, :surname)
+    params.permit(:avatar, :name, :surname)
   end
 
   def attach_avatar_to_customer
