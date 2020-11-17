@@ -5,7 +5,7 @@ class SessionsController < Devise::SessionsController
     user = User.find_by(email: session_params[:email])
     if user&.valid_password?(session_params[:password])
       sign_in user
-      session = { token: current_token }
+      session = { authorization_token: current_token }
       render json: {status: 'OK', message: 'Login completed', data: session}, status: :ok
     else
       render json: {status: 'Error', message: 'Invalid user/password ', data: session}, status: :unprocessable_entity
