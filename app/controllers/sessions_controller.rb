@@ -22,11 +22,7 @@ private
     params.require(:user).permit(:email, :password)
   end
 
-  def respond_with(resource, _opts = {})
-    render json: resource
-  end
-
   def respond_to_on_destroy
-    head :ok
+    head :unauthorized
   end
 end

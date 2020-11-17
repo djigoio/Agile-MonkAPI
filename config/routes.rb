@@ -10,9 +10,10 @@ Rails.application.routes.draw do
     sessions: 'sessions',
     registrations: 'registrations'
   }
-
   namespace 'v1' do
     resources :customers
     resources :users
   end
+
+
 end
