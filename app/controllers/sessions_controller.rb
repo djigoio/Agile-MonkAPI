@@ -6,13 +6,13 @@ class SessionsController < Devise::SessionsController
     if user&.valid_password?(session_params[:password])
       sign_in user
       session = { authorization_token: current_token }
-      render json: {status: 'OK', message: 'Login completed', data: session}, status: :ok
+      render json: { status: 'OK', message: 'Login completed', data: session }, status: :ok
     else
-      render json: {status: 'Error', message: 'Invalid user/password ', data: session}, status: :unprocessable_entity
+      render json: { status: 'Error', message: 'Invalid user/password ', data: session }, status: :unprocessable_entity
     end
   end
 
-private
+  private
 
   def current_token
     request.env['warden-jwt_auth.token']
