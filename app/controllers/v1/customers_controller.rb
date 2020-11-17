@@ -4,35 +4,35 @@ class V1::CustomersController < ApplicationController
   
   def index
     customers = Customer.all
-    successful_response('All customers loaded', customers)
+    render json: {status: 'OK', message: 'All customers loaded', data: customers}, status: :ok
   end
 
   def show
     customer = { avatar_url: url_for(@customer.avatar), record: @customer }
-    successful_response('Customer shown', @customer)
+    render json: {status: 'OK', message: 'Customer shown', data: @customer}, status: :ok
   end
 
   def create
     @customer = Customer.create(customer_params)
     attach_avatar_to_customer if params[:avatar].present?
     customer.update_attribute(:created_by, current_user.id)
-    successful_response('Customer created', @customer)
+    render json: {status: 'OK', message: 'Customer created', data: @customer}, status: :created
   end
       
   def update
     attach_avatar_to_customer if params[:avatar].present?
-  if @customer.update_attributes(customer_params)
-      successful_response('Customer updated', @customer)
+    if @customer.update_attributes(customer_params)
+      render json: {status: 'OK', message: 'Customer updated', data: @customer}, status: :ok
     else
-      erroneous_response('Customer updated', @customer)
+      render json: {status: 'ERROR', message: 'Customer NOT updated', data: @customer.errors}, status: :unprocessable_entity
     end
   end
       
   def destroy
     if @customer.destroy
-      successful_response('Customer was deleted', @customer)
+      render json: {status: 'OK', message: 'Customer deleted', data: @customer}, status: :ok
     else 
-      erroneous_response('Customer was NOT deleted', @customer)
+      render json: {status: 'ERROR', message: 'Customer NOT deleted', data: @customer.errors}, status: :unprocessable_entity
     end
   end
 
@@ -53,13 +53,4 @@ class V1::CustomersController < ApplicationController
   def attach_avatar_to_customer
     @customer.avatar.attach(params[:avatar]) 
   end
-
-  def successful_response(message, data)
-    render json: {status: 'OK', message: message, data: data}, status: :ok
-  end
-
-  def erroneous_response(message, data)
-    render json: {status: 'ERROR', message: message, data: data.errors}, status: :unprocessable_entity
-  end
-
 end
