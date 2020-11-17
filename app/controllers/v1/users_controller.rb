@@ -9,7 +9,7 @@ class V1::UsersController < ApplicationController
 
   def create
     @user = User.create!(user_params)
-    render json: {status: 'OK', message: 'User generated', data: @user}, status: :ok
+    render json: {status: 'OK', message: 'User generated', data: @user}, status: :created
   end
 
   def show
