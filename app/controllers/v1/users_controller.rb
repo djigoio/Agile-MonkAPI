@@ -37,9 +37,8 @@ class V1::UsersController < ApplicationController
   end
 
   def auth_admin
-    unless @current_user.is_admin?
-      error = 'You do not have permissions to perform that action'
-      json_response(error, 401)
+    unless current_user.is_admin?
+      render json: {status: 'UNAUTHORIZED', message: 'You do not have permissions to perform that action', data: @user}, status: :unauthorized
     end
   end
 end

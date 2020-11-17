@@ -1,8 +1,6 @@
 class V1::CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :update, :destroy]
-  # before_action :set_last_updated_by, only: :update
-  # TODO Fix this callback
-  # TODO current_user not being set
+  before_action :set_last_updated_by, only: :update
   
   def index
     customers = Customer.all
@@ -17,7 +15,7 @@ class V1::CustomersController < ApplicationController
   def create
     @customer = Customer.create(customer_params)
     attach_avatar_to_customer if params[:avatar].present?
-    #customer.update_attribute(:created_by, current_user.id)
+    customer.update_attribute(:created_by, current_user.id)
     successful_response('Customer created', @customer)
   end
       
